@@ -74,12 +74,15 @@ class Hand:
 
     def current_points(self):
         aces = "ace of clubs ace of dimonds ace of hearts ace of spades"
+        ace = 0
         if self.player_value > 21:
             for alist in self.player_cards_in_hand:
                 for card in alist:
                     if card in aces:
-                        if self.player_value > 21:
+                        ace += 1
+                        if self.player_value > 21 and ace > 0:
                             self.player_value -= 10
+                            ace -= 1
                     else:
                         print("\nBUST, You Lose.")
                         self.player_ply = False
@@ -110,12 +113,15 @@ class Hand:
     def staying(self):
         print(f"\nDealer has {self.dealer_cards_in_hand}, total of {self.dealer_value}")
         aces = "ace of clubs ace of dimonds ace of hearts ace of spades"
+        ace = 0
         if self.dealer_value > 21:
             for alist in self.dealer_cards_in_hand:
                 for card in alist:
                     if card in aces:
-                        if self.dealer_value > 21:
+                        ace += 1
+                        if self.dealer_value > 21 and ace > 0:
                             self.dealer_value -= 10
+                            ace -= 1
                         elif self.dealer_value < 21:
                             self.staying()
                     else:
